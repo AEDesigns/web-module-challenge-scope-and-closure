@@ -115,29 +115,38 @@ and returns the score at each pont in the game, like so:
 8th inning: awayTeam - homeTeam
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
-
-
-function scoreboard(callback, num) {
-  let scores = {
-    Home: 0,
-    Away: 0
+function getInningScore(cb){
+  return {
+    home: cb(),
+    away: cb()
   }
-  for(let i = 0; i < num; i++){
-    scores.Home = scores.Home + callback();
-    scores.Away = scores.Away + callback();
-    if(i === 0){
-      console.log(`${i + 1}st inning: ${scores.Home} - ${scores.Away}`)
-    } else if (i === 1){
-      console.log(`${i + 1}nd inning: ${scores.Home} - ${scores.Away}`)
-    }else if (i === 2){
-      console.log(`${i + 1}rd inning: ${scores.Home} - ${scores.Away}`)
-    }else {
-      console.log(`${i + 1}th inning: ${scores.Home} - ${scores.Away}`)
-    }
-  }
-  console.log(`Final Score: ${scores.Home} - ${scores.Away}`)
 }
 
-scoreboard(inning, 9);
+function scoreboard(cb1, cb2, num) {
+  let awayTeam = 0;
+  let homeTeam = 0;
+
+  for(let i = 1; i <= num; i++){
+    if(i === 1){
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`${i}st inning: ${awayTeam} - ${homeTeam}`)
+    } else if(i === 2){
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`${i}nd inning: ${awayTeam} - ${homeTeam}`)
+    } else if(i === 3){
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
+      console.log(`${i}rd inning: ${awayTeam} - ${homeTeam}`)
+    } else {
+      console.log(`${i}th inning: ${awayTeam} - ${homeTeam}`)
+    }
+  }
+  console.log(`Final Score: ${awayTeam} - ${homeTeam}`);
+
+}
+
+scoreboard(getInningScore, inning, 9);
 
 
