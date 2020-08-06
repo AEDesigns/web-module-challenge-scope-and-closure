@@ -140,6 +140,8 @@ function scoreboard(cb1, cb2, num) {
       homeTeam += cb1(cb2).home;
       console.log(`${i}rd inning: ${awayTeam} - ${homeTeam}`)
     } else {
+      awayTeam += cb1(cb2).away;
+      homeTeam += cb1(cb2).home;
       console.log(`${i}th inning: ${awayTeam} - ${homeTeam}`)
     }
   }
