@@ -27,9 +27,11 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
- * Count 1 uses a closure, where counter2 just increments count
+ *Counter1 is function scoped where counter2 is using global variables, as well counterMaker is using a closure.
+
  * 2. Which of the two uses a closure? How can you tell?
  * Counter1(counterMaker) uses a closure, as it declares a variable, and returns a HOF which increments the variable
+ 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  * You want to use counter1 when the data is only relevant to the function, and count2 when you need to use the variable in multiple instances
 */
@@ -76,11 +78,23 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(callback, inningNum){
 
-  /*Code Here*/
+  let inningScore = {
+    Home: 0,
+    Away: 0
+  }
 
+  for(let i = 0; i < inningNum; i++){
+    inningScore.Home = callback();
+    inningScore.Away = callback();
+  }
+
+  return inningScore
 }
+
+console.log(finalScore(inning, 3));
+console.log(finalScore(inning, 6));
 
 /* Task 4: 
 
